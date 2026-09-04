@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Expense {
     private int id ;
     private String  title ;
-    private String  catagory ;
+    private String  category ;
     private double  price ;
     private LocalDate date ;
 
@@ -24,10 +24,10 @@ public class Expense {
     //  public Expense() {
     // }
 
-    //   public Expense(int id, String title, String catagory, double price, LocalDate date) {
+    //   public Expense(int id, String title, String category, double price, LocalDate date) {
     //     this.id = id;
     //     this.title = title;
-    //     this.catagory = catagory;
+    //     this.category = category;
     //     this.price = price;
     //     this.date = date;
     // }
@@ -45,11 +45,11 @@ public class Expense {
     // public void setTitle(String title) {
     //     this.title = title;
     // }
-    // public String getCatagory() {
-    //     return catagory;
+    // public String getcategory() {
+    //     return category;
     // }
-    // public void setCatagory(String catagory) {
-    //     this.catagory = catagory;
+    // public void setcategory(String category) {
+    //     this.category = category;
     // }
     // public double getPrice() {
     //     return price;
