@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class ExpenseController {
 
-    private final JdbcTemplate jdbcTemplate ;//here i use final because i want to use it in constructor and i want to make it immutable and it restrict auto initialization of jdbcTemplate and i want to initialize it in constructor only
+    private final JdbcTemplate jdbcTemplate ;
+//here i use final because i want to use it in constructor and i want to make it immutable and it restrict auto initialization of jdbcTemplate and i want to initialize it in constructor only
 //so i comment xonstructer  bellow
    private static final String EXPENSES_TABLE = "expenses";
     // public ExpenseController(JdbcTemplate jdbcTemplate){
