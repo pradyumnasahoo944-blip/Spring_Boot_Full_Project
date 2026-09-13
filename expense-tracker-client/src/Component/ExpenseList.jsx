@@ -2,7 +2,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const ExpenseList = ({expenses}) => {
+const ExpenseList = ({expenses, getExpenses}) => {
 
       
 
@@ -12,7 +12,7 @@ const ExpenseList = ({expenses}) => {
           try {
              const response =await axios.delete('http://localhost:8080/expenses/'+expenseId)
              if(response.status ==204){
-              getExpenses();
+              getExpenses()
              }else{
               alert("Unable to delete the expense")
              }

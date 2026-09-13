@@ -31,9 +31,9 @@ export default  function App() {
       <Header/>
 
       <main className="max-w-4xl mx-auto py-4 mt-4">
-      <ExpenseForm/>
+      <ExpenseForm getExpenses={getExpenses}/>
       <Summary expenses={expenses}/>
-      <ExpenseList expenses={expenses}/>
+      <ExpenseList expenses={expenses} getExpenses={getExpenses}/>
       </main>
 
       <Footer>
