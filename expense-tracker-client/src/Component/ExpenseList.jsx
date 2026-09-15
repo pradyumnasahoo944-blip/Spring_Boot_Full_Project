@@ -1,8 +1,9 @@
 
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import expenseService from '../services/expenseService'
 
-const ExpenseList = ({expenses, getExpenses}) => {
+const ExpenseList = ({expenses, getExpenses,setEditingExpense}) => {
 
       
 
@@ -10,7 +11,7 @@ const ExpenseList = ({expenses, getExpenses}) => {
         const handleDelete =async(expenseId)=>{
           if(confirm("Are u sure want to delete the expenses")){
           try {
-             const response =await axios.delete('http://localhost:8080/expenses/'+expenseId)
+             const response =await expenseService.deleteExpense(expenseId)
              if(response.status ==204){
               getExpenses()
              }else{
@@ -23,7 +24,9 @@ const ExpenseList = ({expenses, getExpenses}) => {
           }
         }
       
-
+       function handleEdit(expense){
+        setEditingExpense(expense)
+       }
 
   return (
     <div className='bg-white rounded-2xl shadow-md px-6 py-6 mb-6'>
@@ -82,7 +85,7 @@ const ExpenseList = ({expenses, getExpenses}) => {
 
             <td className='px-4 py-3 text-center'>
 
-              <button className='bg-yellow-400 hover:bg-yellow-500 text-white font-semibold rounded-lg px-3 py-1.5 transition-colors duration-200 text-xs mr-2'>
+              <button onClick={()=>handleEdit(exp)} className='bg-yellow-400 hover:bg-yellow-500 text-white font-semibold rounded-lg px-3 py-1.5 transition-colors duration-200 text-xs mr-2'>
                 Edit
               </button>
 
