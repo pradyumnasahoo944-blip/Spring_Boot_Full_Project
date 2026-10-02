@@ -22,9 +22,11 @@ public class HelloController {
         System.out.println("Hello Web");
         writer.println("<h1> Hello Spring Web </h1>  <p>Welcome</p>");
 
-    }
+                   }
 
     @RequestMapping("/")
+    
+     
     public void landingPage1(PrintWriter printWriter){
         System.out.println("landing page");
         printWriter.println("our first landing page1");
@@ -53,28 +55,30 @@ public class HelloController {
     //     model.addAttribute("phone", phone);
 
     //     return "details-page" ;
+    // }
 
 
     //   @RequestMapping(value = "/submit-details",method =RequestMethod.POST)
-    //   public String submitDetails(@RequestParam(value = "name1",required = false,defaultValue = "Springboot") String name1 ,@RequestParam String phone ,Model model){  
-    // model.addAttribute("name1", name1);//whwn i send data java to html then i use model altribute//if i false the required then if i dont use name  in querystring then it dont show error
-    // //if query param is preset=nt then use if not available then no problrmm
-    // //required = false,defaultValue = "Springboot" is used in case of filtering thwe 
-    // //tehre are differnt type of request is present 
-    // // 1Get--to extract the resourse
-    // // 2post---to create the resourse
-    // // 3 put--to fully update a resourse
-    // // 4patch----to partial update resourse
-    // // 5Delete--to delete the resourse
-    //   model.addAttribute("phone", phone);
-    //   return "details-page" ;
+    //   public String submitDetails(@RequestParam(value = "name1" ,required =false,defaultValue = "springboot ") String name1 ,@RequestParam String phone ,Model model){  
+    // model.addAttribute("name1", name1);
+    // model.addAttribute("phone", phone);
+    // return "details-page" ;
+    //whwn i send data java to html then i use model 
+    // //if i false the required then if i dont use name  in querystring then it dont show error
+    //if query param is preset=nt then use if not available then no problrmm
+    //required = false,defaultValue = "Springboot" is used in case of filtering thwe 
+    //tehre are differnt type of request is present 
+    // 1Get--to extract the resourse
+    // 2post---to create the resourse
+    // 3 put--to fully update a resourse
+    // 4patch----to partial update resourse
+    // 5Delete--to delete the resourse
 
     // }
 
       @RequestMapping(value = "/submit-details",method =RequestMethod.POST)
       public String submitDetails(@ModelAttribute Person person ,Model model){  
-    model.addAttribute("name1", person.getName1
-    ());//person is private so i use getName
+    model.addAttribute("name1", person.getName1());//person is private so i use getName
     
       model.addAttribute("phone", person.getPhone());
       return "details-page" ;

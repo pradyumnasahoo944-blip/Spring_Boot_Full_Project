@@ -141,7 +141,6 @@ const ExpenseForm = ({ getExpenses, editingExpense, setEditingExpense }) => {
         }
 
     }
-
     const handleCancle = () => {
         setEditingExpense(null)
         clearForm()

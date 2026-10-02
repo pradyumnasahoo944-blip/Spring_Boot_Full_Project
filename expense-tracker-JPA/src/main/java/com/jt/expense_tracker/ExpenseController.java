@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,38 +19,39 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin("http://localhost:5173")
+@RequestMapping("/expenses")//it put becoz it all bellow methoid i cannt repaeat expenses query string so here i put it controller class to addd a common previx
 public class ExpenseController {
 
     private final ExpenseService expenseService;
 
     // GET all expenses
-    @GetMapping("/expenses")
+    @GetMapping
     public List<Expense> getExpenses() {
         return expenseService.getExpenses();
     }
 
     // GET expense by ID
-    @GetMapping("/expenses/{id}")
+    @GetMapping("/{id}")
     public Expense getExpenseById(@PathVariable int id) {
         return expenseService.getExpenseById(id);
     }
 
     // CREATE expense
-    @PostMapping("/expenses")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Expense createExpense(@RequestBody Expense expense) {
         return expenseService.addExpense(expense);
     }
 
     // DELETE expense
-    @DeleteMapping("/expenses/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteExpense(@PathVariable int id) {
         expenseService.deleteExpenseById(id);
     }
 
     // UPDATE expense
-    @PutMapping("/expenses")
+    @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Expense updateExpense(@RequestBody Expense expense) {
         return expenseService.updateExpense(expense);
