@@ -11,54 +11,71 @@ import java.util.List;
 @SpringBootApplication
 @RequiredArgsConstructor
 public class ManyToOneApplication {
-    private  final SubjectRepository subjectRepository;
-    private  final TeacherRepository teacherRepository;
-    static void main(String[] args) {
+    private final SubjectRepository subjectRepository;
+    private final TeacherRepository teacherRepository;
+
+    public static void main(String[] args) {
         SpringApplication.run(ManyToOneApplication.class);
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(){
+    public CommandLineRunner commandLineRunner() {
         return args -> {
 //            oneWayBinding();
-            Teacher newTeacher =Teacher.builder().teacherName("Ankit").build();
-            Subject subject1=Subject.builder() .subjectName("   HTML") .teacher(newTeacher).build();
-            Subject subject2=Subject.builder() .subjectName("CSS") .teacher(newTeacher).build();
-            Subject subject3=Subject.builder() .subjectName("javaSCRIPT") .teacher(newTeacher).build();
-            Subject subject4=Subject.builder() .subjectName("python") .teacher(newTeacher).build();
 
-            newTeacher.setSubjects(List.of(subject1,subject2,subject3,subject4));
-            teacherRepository.save(newTeacher);
-            //EXTRACT
+
+            //bidirectional
+            Subject subject1 = Subject.builder().subjectName("HTML").build();
+            Subject subject2 = Subject.builder().subjectName("CSS").build();
+            Subject subject3 = Subject.builder().subjectName("JavaScript").build();
+
+            Teacher newTeacher = Teacher.builder()
+                    .teacherName("Ankit").subjects(List.of(subject1, subject2, subject3)).build();
+
+            subject1.setTeacher(newTeacher);
+            subject2.setTeacher(newTeacher);
+            subject3.setTeacher(newTeacher);
+
+//            teacherRepository.save(newTeacher);
+
+//            EXTRACT
             teacherRepository.findById(1)
                     .orElseThrow()
                     .getSubjects()
-                    .forEach(sub->{
-                        System.out.println(sub.getTeacher()+"\t->\t"+sub.getSubjectName());
+                    .forEach(sub -> {
+                        System.out.println(sub.getTeacher().getTeacherName() + "\t->\t" + sub.getSubjectName());
                     });
+
+            //update
+            Teacher teacher =teacherRepository.findById(1).orElseThrow();
+            teacher.setTeacherName("Sai  sir ");
+            teacher.getSubjects().get(0).setSubjectName(".net");
+            teacherRepository.save(teacher);
 
         };
     }
 
-    private void oneWayBinding(){
-        Teacher teacher =Teacher.builder()
-                .teacherName("Amit")
-                .build();
-        Subject subject1=Subject.builder() .subjectName("C") .teacher(teacher).build();
-        Subject subject2=Subject.builder() .subjectName("C++") .teacher(teacher).build();
-        Subject subject3=Subject.builder() .subjectName("java") .teacher(teacher).build();
-        Subject subject4=Subject.builder() .subjectName("python") .teacher(teacher).build();
-//        subjectRepository.saveAll(List.of(subject1,subject2,subject3,subject4));
-        //Update
+    private void oneWayBinding() {
+//        SAVE
+        Teacher teacher = Teacher.builder().teacherName("Amit").build();
 
-        //delete
+        Subject subject1 = Subject.builder().subjectName("C").teacher(teacher).build();
+        Subject subject2 = Subject.builder().subjectName("C++").teacher(teacher).build();
+        Subject subject3 = Subject.builder().subjectName("Java").teacher(teacher).build();
 
-        //Extraction
-        subjectRepository.findAll().forEach((Subject sub)->{
-            System.out.println(sub.getSubjectName()+"\t->\t"+sub.getTeacher().getTeacherName());
+        subjectRepository.saveAll(List.of(subject1, subject2, subject3));
+
+//        UPDATE
+        Subject upsubject =subjectRepository.findById(1).orElseThrow();
+        upsubject.setSubjectName("React js ");
+         upsubject.getTeacher().setTeacherName("Sai sir ");
+//         subjectRepository.save(upsubject);
+
+//        DELETE
+
+//        Extract
+        subjectRepository.findAll().forEach((sub) -> {
+            System.out.println(sub.getSubjectName() + "\t->\t" + sub.getTeacher().getTeacherName());
         });
-
-
-
     }
 }

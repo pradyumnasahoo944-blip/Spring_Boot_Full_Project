@@ -72,6 +72,7 @@ public class OneToOneApplication {
 		Student student = Student.builder()
 				.studentName("pradyumna ")
 				.studentEmail("p@gmail.com")
+
 				.build();
 
 		Adress adress=Adress.builder()
@@ -81,7 +82,28 @@ public class OneToOneApplication {
 				.student(student)
 				.build();
 		student.setAdress(adress);
-		adressRepository.save(adress);
+//		adressRepository.save(adress);
+		//UPDATE
+	Adress existingStudent =  adressRepository.findById(1).orElseThrow();
+	//for updating address data
+		existingStudent.setState("odisha");
+		existingStudent.setCity("rourkela");
+	//for updating student data
+	Student student1 =existingStudent.getStudent();
+//		System.out.println(student1);
+		student1.setStudentName("Manoj");
+		student1.setStudentEmail("@manoj");
+		adressRepository.save(existingStudent);
+
+
+		Adress withroll = adressRepository.findById(1).orElseThrow();
+		System.out.println(withroll.getCity());
+		Student withst=withroll.getStudent();
+		System.out.println(withst.getStudentName());
+
+
+
+
 
 	}
 }

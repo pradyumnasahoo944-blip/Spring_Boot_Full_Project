@@ -59,6 +59,7 @@ public class ManyToManyApplication {
         studentRepository.saveAll(List.of(student1, student2, student3));
 
         //update
+
         //delete
         //extract
 
